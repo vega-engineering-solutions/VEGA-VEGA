@@ -837,7 +837,9 @@ footer{background:#050607;border-color:#191e22;color:#59636c}
       <div class="admin-field"><label>BRAND</label><input id="adminBrand" placeholder="e.g. PIUSI"></div>
       <div class="admin-field"><label>CATEGORY *</label><select id="adminCategory" required><option value="pump">Pumps</option><option value="tank">Fuel Tanks</option><option value="filter">Filtration</option><option value="valve">Valves</option><option value="monitor">Monitoring</option><option value="control">Control Panels</option><option value="pipe">Pipes &amp; Fittings</option><option value="electrical">Electrical</option></select></div>
       <div class="admin-field"><label>SUPPLIER</label><input id="adminSupplier" placeholder="Supplier name"></div>
-      <div class="admin-field"><label>SELLING PRICE (SAR)</label><input id="adminPrice" type="number" min="0" step="0.01" placeholder="0"></div>
+      <div class="admin-field"><label>SUPPLIER COST (SAR)</label><input id="adminCost" type="number" min="0" step="0.01" placeholder="0"></div>
+       <div class="admin-field"><label>PROFIT MARGIN (%)</label><input id="adminMargin" type="number" min="0" max="99.99" step="0.01" value="30"></div>
+       <div class="admin-field full"><label>CALCULATED SELLING PRICE (SAR)</label><input id="adminPrice" type="number" readonly><div class="admin-help">Selling price = Supplier cost / (1 - Margin / 100)</div></div>
       <div class="admin-field full"><label>DESCRIPTION</label><textarea id="adminDescription" placeholder="Product description..."></textarea></div>
       <div class="admin-field full"><label>SPECIFICATIONS</label><textarea id="adminSpecs" placeholder="Flow Rate: 120 L/min&#10;Voltage: 230 V&#10;Connection: 1 inch"></textarea><div class="admin-help">One specification per line: Name: Value</div></div>
       <div class="admin-field"><label>PRODUCT IMAGE</label><input id="adminImage" type="file" accept="image/png,image/jpeg,image/webp"><div class="admin-help" id="currentImage"></div></div>
@@ -914,17 +916,36 @@ const SUPABASE_KEY = "sb_publishable_2ILrBAA2dxgjmpqzx0StHQ_lgWTykqM";
 const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 let adminSession = null;
+let isAdmin = false;
+function calcPrice(cost, margin){return Math.round((Number(cost)/(1-Number(margin)/100)+Number.EPSILON)*100)/100;}
+function updateCalculatedPrice(){
+ const cost=Number(document.getElementById('adminCost').value||0);
+ const margin=Number(document.getElementById('adminMargin').value||0);
+ document.getElementById('adminPrice').value=(cost>=0 && margin>=0 && margin<100)?calcPrice(cost,margin).toFixed(2):'';
+}
+
 
 async function refreshAdminUI(){
     const { data } = await db.auth.getSession();
     adminSession = data.session || null;
-    const signedIn = !!adminSession;
+    let signedIn = false;
+    if(adminSession){
+      const {data: role, error: roleError} = await db.from('admin_users').select('user_id').eq('user_id',adminSession.user.id).maybeSingle();
+      signedIn = !roleError && !!role;
+    }
+    isAdmin = signedIn;
+    const sortSelect=document.getElementById('sortFilter');
+    if(sortSelect){
+      for(const opt of sortSelect.options){if(opt.value==='low'||opt.value==='high')opt.hidden=!isAdmin;}
+      if(!isAdmin && ['low','high'].includes(sortSelect.value))sortSelect.value='default';
+    }
     document.getElementById("guestAdminActions")?.classList.toggle("hidden", signedIn);
     document.getElementById("signedAdminActions")?.classList.toggle("hidden", !signedIn);
     document.getElementById("productAdminActions")?.classList.toggle("hidden", !signedIn);
     const email = adminSession?.user?.email || "";
     const emailEl = document.getElementById("adminEmail");
     if(emailEl) emailEl.textContent = email;
+    if(typeof loadProducts==='function') await loadProducts();
 }
 
 function openLogin(){
@@ -981,7 +1002,9 @@ async function normalizeProduct(product){
         categoryName: categoryLabel(product.category),
         description: product.description || "",
         supplier: product.supplier || "",
-        price: Number(product.price) || 0,
+        cost: product.cost == null ? null : Number(product.cost),
+        margin: product.margin == null ? null : Number(product.margin),
+        price: product.price == null ? null : Number(product.price),
         image_url: product.image_url || "",
         datasheet: product.datasheet_url || "",
         specs,
@@ -1013,7 +1036,7 @@ async function loadProducts(){
     try{
         const { data, error } = await db
             .from("products")
-            .select("*")
+            .select("id,name,model,brand,category,description,image_url,datasheet_url,specifications")
             .order("id", { ascending: true });
 
         if(error) throw error;
@@ -1033,8 +1056,8 @@ async function loadProducts(){
                 category: product.category || "",
                 categoryName: categoryLabel(product.category),
                 description: product.description || "",
-                supplier: product.supplier || "",
-                price: Number(product.price) || 0,
+                supplier: "",
+                cost: null, margin: null, price: null,
                 image_url: product.image_url || "",
                 datasheet: product.datasheet_url || "",
                 specs,
@@ -1042,6 +1065,12 @@ async function loadProducts(){
             };
         });
 
+        if(isAdmin && productData.length){
+          const {data: pricing, error: pricingError}=await db.from('product_pricing').select('product_id,supplier,cost,margin,price');
+          if(pricingError)console.error('Pricing access error:',pricingError);
+          const prices=new Map((pricing||[]).map(x=>[String(x.product_id),x]));
+          productData.forEach(p=>{const x=prices.get(String(p.id));if(x){p.supplier=x.supplier||'';p.cost=x.cost==null?null:Number(x.cost);p.margin=x.margin==null?null:Number(x.margin);p.price=x.price==null?null:Number(x.price);}});
+        }
         refreshBrandFilter();
         renderProducts();
         console.log("VEGA products loaded:", productData.length, data);
@@ -1089,7 +1118,7 @@ function specsToText(specs){
 }
 
 function openAdmin(product=null){
-    if(!adminSession){ openLogin(); return; }
+    if(!isAdmin){ openLogin(); return; }
     editingProduct=product;
     document.getElementById("productForm").reset();
     document.getElementById("adminStatus").textContent="";
@@ -1101,7 +1130,9 @@ function openAdmin(product=null){
     document.getElementById("adminBrand").value=product?.brand || "";
     document.getElementById("adminCategory").value=product?.category || "pump";
     document.getElementById("adminSupplier").value=product?.supplier || "";
-    document.getElementById("adminPrice").value=product?.price || "";
+    document.getElementById("adminCost").value=product?.cost ?? "";
+    document.getElementById("adminMargin").value=product?.margin ?? 30;
+    updateCalculatedPrice();
     document.getElementById("adminDescription").value=product?.description || "";
     document.getElementById("adminSpecs").value=specsToText(product?.specs);
     document.getElementById("currentImage").textContent=product?.image_url ? "Current image saved ✓" : "";
@@ -1126,7 +1157,7 @@ async function uploadProductFile(file, kind){
 
 async function saveProduct(event){
     event.preventDefault();
-    if(!adminSession){ openLogin(); return; }
+    if(!isAdmin){ openLogin(); return; }
     const btn=document.getElementById("adminSave");
     const status=document.getElementById("adminStatus");
     btn.disabled=true; btn.textContent="SAVING...";
@@ -1144,8 +1175,6 @@ async function saveProduct(event){
             brand:document.getElementById("adminBrand").value.trim(),
             category:document.getElementById("adminCategory").value,
             description:document.getElementById("adminDescription").value.trim(),
-            supplier:document.getElementById("adminSupplier").value.trim(),
-            price:Number(document.getElementById("adminPrice").value)||0,
             image_url:imageUrl,
             datasheet_url:datasheetUrl,
             specifications:parseSpecifications(document.getElementById("adminSpecs").value)
@@ -1169,6 +1198,17 @@ async function saveProduct(event){
 
         if(result.error) throw result.error;
 
+        const costValue=document.getElementById('adminCost').value;
+        const marginValue=document.getElementById('adminMargin').value;
+        const cost=costValue===''?null:Number(costValue);
+        const margin=marginValue===''?null:Number(marginValue);
+        if(cost!==null && (margin===null || margin<0 || margin>=100))throw Error('Margin must be between 0 and 99.99%');
+        const {error: pricingSaveError}=await db.from('product_pricing').upsert({
+          product_id:result.data.id,
+          supplier:document.getElementById('adminSupplier').value.trim(),
+          cost,margin,price:cost===null?null:calcPrice(cost,margin)
+        },{onConflict:'product_id'});
+        if(pricingSaveError)throw pricingSaveError;
         // Put the saved product on screen immediately.
         if(result.data){
             const saved = await normalizeProduct(result.data);
@@ -1206,7 +1246,7 @@ function editProduct(id){
 }
 
 async function deleteProduct(id){
-    if(!adminSession){ openLogin(); return; }
+    if(!isAdmin){ openLogin(); return; }
     const p=productData.find(x=>String(x.id)===String(id));
     if(!p || !confirm(`Delete ${p.name}?`)) return;
     const {error}=await db.from("products").delete().eq("id",id);
@@ -1701,7 +1741,7 @@ function renderProducts(){
                             <div class="card-footer">
 
 
-                                <div class="price">
+                                ${isAdmin ? `<div class="price">
 
 
                                     <small>
@@ -1713,13 +1753,12 @@ function renderProducts(){
 
                                     <strong>
 
-                                        ${product.price.toLocaleString()}
-                                        SAR
+                                        ${product.price == null ? "Not set" : product.price.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2}) + " SAR"}
 
                                     </strong>
 
 
-                                </div>
+                                </div>` : ""}
 
 
                                 <button
@@ -1840,13 +1879,8 @@ function openProduct(id){
     )
     .textContent=
 
-        activeProduct
-        .price
-        .toLocaleString()
-
-        +
-
-        " SAR";
+        isAdmin ? (activeProduct.price == null ? 'Not set' : activeProduct.price.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})+' SAR') : ''; 
+    document.querySelector('.modal-price').classList.toggle('hidden',!isAdmin);
 
 
 
@@ -2142,6 +2176,8 @@ document
    START
 ========================================================= */
 
+document.getElementById('adminCost').addEventListener('input',updateCalculatedPrice);
+document.getElementById('adminMargin').addEventListener('input',updateCalculatedPrice);
 window.addEventListener("DOMContentLoaded", async () => {
     await refreshAdminUI();
     await loadProducts();
