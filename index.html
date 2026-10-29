@@ -973,6 +973,10 @@ async function loginAdmin(event){
     }
     closeLogin();
     await refreshAdminUI();
+    if(!isAdmin){
+        status.textContent="This account is not authorized as a VEGA administrator.";
+        document.getElementById("loginModal").classList.remove("hidden");
+    }
 }
 async function logoutAdmin(){
     await db.auth.signOut();
@@ -1202,7 +1206,7 @@ async function saveProduct(event){
         const marginValue=document.getElementById('adminMargin').value;
         const cost=costValue===''?null:Number(costValue);
         const margin=marginValue===''?null:Number(marginValue);
-        if(cost!==null && (margin===null || margin<0 || margin>=100))throw Error('Margin must be between 0 and 99.99%');
+        if(cost!==null && (!Number.isFinite(cost) || cost<0 || margin===null || !Number.isFinite(margin) || margin<0 || margin>=100))throw Error('Enter a valid nonnegative cost and margin between 0 and 99.99%');
         const {error: pricingSaveError}=await db.from('product_pricing').upsert({
           product_id:result.data.id,
           supplier:document.getElementById('adminSupplier').value.trim(),
@@ -2180,7 +2184,6 @@ document.getElementById('adminCost').addEventListener('input',updateCalculatedPr
 document.getElementById('adminMargin').addEventListener('input',updateCalculatedPrice);
 window.addEventListener("DOMContentLoaded", async () => {
     await refreshAdminUI();
-    await loadProducts();
 });
 
 </script>
