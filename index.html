@@ -152,9 +152,8 @@ button{cursor:pointer}
 .detail-row{display:grid;grid-template-columns:.85fr 1.15fr;border-bottom:1px solid #e5e7e9;font-size:11px}
 .detail-row:last-child{border-bottom:0}.detail-row span{padding:11px;background:#f5f6f7;color:#767f87}.detail-row strong{padding:11px}
 .modal-price{margin-top:24px}.modal-price small{display:block;color:#8b939a;font-size:9px}.modal-price strong{display:block;margin-top:3px;color:var(--red);font-size:29px}
-.modal-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px}
-.datasheet-button,.quote-button{height:47px;border:0;border-radius:4px;font-weight:bold}
-.datasheet-button{background:var(--red);color:#fff}.quote-button{background:#15191d;color:#fff}
+.modal-actions{display:grid;grid-template-columns:1fr;gap:10px;margin-top:22px}
+.datasheet-button{height:47px;border:0;border-radius:4px;background:var(--red);color:#fff;font-weight:bold}
 footer{padding:24px 5%;display:flex;justify-content:space-between;gap:20px;background:#060708;border-top:1px solid #252b31;color:#67717b;font-size:10px}
 
 @media(max-width:1050px){
@@ -774,16 +773,6 @@ footer{background:#050607;border-color:#191e22;color:#59636c}
                 >
 
                     📄 VIEW DATASHEET
-
-                </button>
-
-
-                <button
-                    class="quote-button"
-                    onclick="requestQuotation()"
-                >
-
-                    REQUEST QUOTATION
 
                 </button>
 
@@ -1977,23 +1966,6 @@ function openDatasheet(){
         );
 
     }
-
-}
-
-
-
-/* =========================================================
-   QUOTATION
-========================================================= */
-
-function requestQuotation(){
-
-
-    alert(
-
-        "Quotation function can be connected later."
-
-    );
 
 }
 
