@@ -1830,7 +1830,7 @@ function renderProducts(){
 
                                     <strong>
 
-                                        ${product.selling_price == null ? "Contact for price" : product.selling_price.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2}) + " SAR"}
+                                        ${product.selling_price == null ? "" : product.selling_price.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2}) + " SAR"}
 
                                     </strong>
 
@@ -1952,7 +1952,7 @@ function openProduct(id){
 
     const visibleSellingPrice=activeProduct.selling_price ?? (isAdmin ? activeProduct.price : null);
     document.getElementById("modalPrice").textContent=visibleSellingPrice == null
-        ? 'Contact for price'
+        ? ''
         : visibleSellingPrice.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})+' SAR';
     document.querySelector('.modal-price').classList.remove('hidden');
 
