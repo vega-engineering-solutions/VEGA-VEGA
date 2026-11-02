@@ -196,9 +196,11 @@ footer{padding:24px 5%;display:flex;justify-content:space-between;gap:20px;backg
 .admin-field{display:flex;flex-direction:column;gap:6px}.admin-field.full{grid-column:1/-1}.admin-field label{font-size:9px;font-weight:900;letter-spacing:1px;color:#69727a}
 .admin-field input,.admin-field select,.admin-field textarea{width:100%;padding:11px;border:1px solid #d5d9dd;border-radius:4px;outline:0;background:#fff;color:#171a1d}
 .admin-field textarea{min-height:95px;resize:vertical}.admin-help{font-size:9px;color:#8a9299;line-height:1.5}
+.vendor-manager{grid-column:1/-1;padding:14px;border:1px solid #e0e3e5;border-radius:5px;background:#fafbfc}.vendor-manager-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}.vendor-manager-head strong{font-size:11px;letter-spacing:.5px}.vendor-add{border:1px solid #d5d9dd;border-radius:4px;background:#fff;padding:8px 11px;color:#171a1d;font-size:10px;font-weight:800}.vendor-list{display:grid;gap:9px}.vendor-row{display:grid;grid-template-columns:22px 1.25fr 1fr 1fr 32px;gap:8px;align-items:center;padding:9px;background:#fff;border:1px solid #e5e7e9;border-radius:4px}.vendor-row input{min-width:0;width:100%;padding:9px;border:1px solid #d5d9dd;border-radius:4px}.vendor-row label{font-size:8px;color:#77818a}.vendor-select{display:flex;align-items:center;justify-content:center}.vendor-remove{height:32px;border:0;border-radius:4px;background:#fff0f0;color:#c71920;font-weight:900}.vendor-price-table{margin-top:12px;border:1px solid #e0e3e5;border-radius:5px;overflow:hidden}.vendor-price-table h3{padding:11px 13px;background:#f5f6f7;font-size:10px;letter-spacing:.6px}.vendor-price-table table{width:100%;border-collapse:collapse;font-size:10px}.vendor-price-table th,.vendor-price-table td{padding:10px;text-align:left;border-top:1px solid #e5e7e9}.vendor-price-table th{color:#7b848c;font-size:8px;letter-spacing:.5px;text-transform:uppercase}
 .admin-save{grid-column:1/-1;height:50px;border:0;border-radius:4px;background:var(--red);color:#fff;font-size:11px;font-weight:900;letter-spacing:1px}
+.vendor-calculated{grid-column:2/-1;display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:-2px;padding:8px 10px;border-radius:4px;background:#f5f6f7;color:#6f7880;font-size:9px}.vendor-calculated strong{color:#ed1c24;font-size:12px}.vendor-use{border:0;border-radius:3px;background:#15191d;color:#fff;padding:7px 9px;font-size:8px;font-weight:800;white-space:nowrap}.vendor-row.is-selected{border-color:#ed1c24;box-shadow:0 0 0 1px rgba(237,28,36,.12)}
 .admin-save:disabled{opacity:.55;cursor:wait}.admin-status{grid-column:1/-1;min-height:18px;font-size:11px;font-weight:700}.admin-status.error{color:#c71920}.admin-status.ok{color:#16854b}
-@media(max-width:760px){.admin-form{grid-template-columns:1fr}.admin-field.full,.admin-save,.admin-status{grid-column:1}.add-product-button{padding:0 10px}}
+@media(max-width:760px){.admin-form{grid-template-columns:1fr}.admin-field.full,.admin-save,.admin-status,.vendor-manager{grid-column:1}.add-product-button{padding:0 10px}.vendor-row{grid-template-columns:22px 1fr 1fr 32px}.vendor-row input[data-vendor-field="cost"]{grid-column:2/4}.vendor-row label{display:none}}
 
 .admin-login-button{height:42px;padding:0 15px;border:1px solid #49525b;border-radius:4px;background:#15191d;color:#fff;font-size:10px;font-weight:900}
 .admin-user{display:flex;align-items:center;gap:8px}
@@ -329,6 +331,45 @@ footer{background:#050607;border-color:#191e22;color:#59636c}
         display: none !important;
     }
 }
+/* ===== POLISHED VEGA HOME ===== */
+#homePage{
+  position:relative!important;isolation:isolate;width:100%;height:100svh;min-height:680px;overflow:hidden;
+  background:#030507 url("Vega_ A Star Among Skies.png") center center/cover no-repeat!important;color:#fff
+}
+#homePage::before{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:linear-gradient(90deg,rgba(2,4,7,.82) 0%,rgba(2,4,7,.58) 29%,rgba(2,4,7,.05) 67%,rgba(2,4,7,.16) 100%),
+    linear-gradient(0deg,rgba(2,4,7,.7) 0%,transparent 32%,rgba(2,4,7,.17) 100%)
+}
+.home-topline,.home-hero-copy,.home-footer{position:absolute;z-index:2}
+.home-topline{top:30px;left:5.3%;right:5.3%;display:flex;align-items:center;justify-content:space-between;padding-bottom:18px;border-bottom:1px solid rgba(255,255,255,.19)}
+.home-brand{display:flex;align-items:center;gap:11px;font-size:12px;font-weight:900;letter-spacing:2.2px}
+.home-brand-mark{display:grid;place-items:center;width:33px;height:33px;border:1px solid rgba(237,28,36,.8);color:#ed1c24;font-size:19px;font-style:italic}
+.home-brand small{display:block;margin-top:4px;color:#aab1b8;font-size:7px;font-weight:700;letter-spacing:2.3px}
+.home-system-status{display:flex;align-items:center;gap:9px;color:#d8dde1;font-size:8px;font-weight:800;letter-spacing:1.7px}
+.home-system-status i{width:7px;height:7px;border-radius:50%;background:#ed1c24;box-shadow:0 0 12px rgba(237,28,36,.8)}
+.home-hero-copy{left:8%;top:48%;width:min(470px,42vw);transform:translateY(-37%)}
+.home-eyebrow{display:flex;align-items:center;gap:10px;color:#e7e9eb;font-size:9px;font-weight:800;letter-spacing:2.5px}
+.home-eyebrow span{width:25px;height:2px;background:#ed1c24}.home-eyebrow b{color:#ed1c24;font-weight:600}
+.home-hero-copy h1{margin-top:22px;font-size:clamp(42px,5vw,68px);line-height:.99;letter-spacing:-3.4px;font-weight:800;text-shadow:0 3px 28px rgba(0,0,0,.35)}
+.home-hero-copy h1 em{color:#ed1c24;font-style:normal}
+.home-hero-copy p{max-width:390px;margin-top:18px;color:#c2c8ce;font-size:14px;line-height:1.75}
+.home-library-button{display:flex;align-items:center;justify-content:space-between;gap:35px;min-width:255px;height:54px;margin-top:27px;padding:0 18px 0 21px;border:1px solid #ed1c24;background:#ed1c24;color:#fff;font-size:10px;font-weight:900;letter-spacing:1.1px;box-shadow:0 12px 34px rgba(237,28,36,.26);transition:transform .2s,background .2s,box-shadow .2s}
+.home-library-button b{font-size:20px;font-weight:400;transition:transform .2s}.home-library-button:hover{transform:translateY(-2px);background:#ff252d;box-shadow:0 16px 40px rgba(237,28,36,.38)}.home-library-button:hover b{transform:translateX(4px)}
+.home-library-button:focus-visible{outline:2px solid #fff;outline-offset:4px}
+.home-hero-note{margin-top:16px;color:#969fa7;font-size:7px;font-weight:800;letter-spacing:1.4px}.home-hero-note span{padding:0 5px;color:#ed1c24}
+.home-footer{left:5.3%;right:5.3%;bottom:24px;display:flex!important;align-items:center;justify-content:space-between;gap:20px;padding-top:14px;border-top:1px solid rgba(255,255,255,.18);color:#abb2b9;font-size:7px;font-weight:800;letter-spacing:1.5px}
+.home-footer div{display:flex;align-items:center;gap:12px}.home-footer i{width:3px;height:3px;border-radius:50%;background:#ed1c24}
+@media(max-width:760px){
+  #homePage{min-height:640px;background-position:56% center!important}
+  #homePage::before{background:linear-gradient(90deg,rgba(2,4,7,.72),rgba(2,4,7,.22)),linear-gradient(0deg,rgba(2,4,7,.78),transparent 55%,rgba(2,4,7,.28))}
+  .home-topline{top:18px;left:20px;right:20px;padding-bottom:13px}.home-brand{font-size:10px;letter-spacing:1.5px}.home-brand-mark{width:29px;height:29px}.home-brand small{font-size:6px;letter-spacing:1.6px}.home-system-status{font-size:6px;letter-spacing:1px;gap:6px}
+  .home-hero-copy{left:24px;right:24px;top:52%;width:auto;max-width:440px;transform:translateY(-25%)}
+  .home-eyebrow{font-size:7px;letter-spacing:1.7px}.home-hero-copy h1{margin-top:17px;font-size:clamp(39px,10vw,56px);letter-spacing:-2.4px}.home-hero-copy p{max-width:350px;margin-top:14px;font-size:12px}
+  .home-library-button{min-width:232px;height:50px;margin-top:21px;font-size:9px}.home-hero-note{font-size:6px;letter-spacing:1px}
+  .home-footer{left:20px;right:20px;bottom:16px;display:block!important;font-size:6px;letter-spacing:1px}.home-footer div{gap:8px;margin-top:9px;font-size:6px}
+}
+@media(max-width:380px){.home-system-status{font-size:0}.home-system-status i{width:8px;height:8px}.home-footer div{gap:6px}.home-footer{font-size:5px}}
 </style>
 
 </head>
@@ -343,7 +384,28 @@ footer{background:#050607;border-color:#191e22;color:#59636c}
 
 
 <section id="homePage">
-  <button class="simple-home-library" onclick="showProducts()">OPEN LIBRARY →</button>
+  <header class="home-topline">
+    <div class="home-brand">
+      <span class="home-brand-mark">V</span>
+      <span>VEGA <small>ENGINEERING SOLUTIONS</small></span>
+    </div>
+    <div class="home-system-status"><i></i> INTERNAL PRODUCT LIBRARY</div>
+  </header>
+
+  <main class="home-hero-copy">
+    <div class="home-eyebrow"><span></span> FUEL SYSTEMS <b>/</b> PRODUCT LIBRARY</div>
+    <h1>Fuel systems<br><em>built for uptime.</em></h1>
+    <p>Explore dependable tanks, pumps, valves, monitoring and control equipment, all in one organized catalog.</p>
+    <button class="home-library-button" onclick="showProducts()">
+      <span>OPEN PRODUCT LIBRARY</span><b aria-hidden="true">→</b>
+    </button>
+    <div class="home-hero-note">PRODUCT DATA &amp; TECHNICAL DETAILS <span>·</span> VEGA INTERNAL DATABASE</div>
+  </main>
+
+  <footer class="home-footer">
+    <span>ENGINEERED FOR RELIABLE OPERATIONS</span>
+    <div><span>TANKS</span><i></i><span>PUMPS</span><i></i><span>CONTROLS</span><i></i><span>MONITORING</span></div>
+  </footer>
 </section>
 
 
@@ -779,6 +841,8 @@ footer{background:#050607;border-color:#191e22;color:#59636c}
 
             </div>
 
+            <div id="adminVendorPrices" class="vendor-price-table hidden"></div>
+
             <div id="productAdminActions" class="admin-actions hidden">
                 <button class="admin-edit" type="button" onclick="editProduct(activeProduct.id)">EDIT PRODUCT</button>
                 <button class="admin-delete" type="button" onclick="deleteProduct(activeProduct.id)">DELETE PRODUCT</button>
@@ -810,10 +874,13 @@ footer{background:#050607;border-color:#191e22;color:#59636c}
       <div class="admin-field"><label>MODEL</label><input id="adminModel" placeholder="e.g. Panther 72"></div>
       <div class="admin-field"><label>BRAND</label><input id="adminBrand" placeholder="e.g. PIUSI"></div>
       <div class="admin-field"><label>CATEGORY *</label><select id="adminCategory" required><option value="pump">Pumps</option><option value="tank">Fuel Tanks</option><option value="filter">Filtration</option><option value="valve">Valves</option><option value="monitor">Monitoring</option><option value="control">Control Panels</option><option value="pipe">Pipes &amp; Fittings</option><option value="electrical">Electrical</option></select></div>
-      <div class="admin-field"><label>SUPPLIER</label><input id="adminSupplier" placeholder="Supplier name"></div>
-      <div class="admin-field"><label>SUPPLIER COST (SAR)</label><input id="adminCost" type="number" min="0" step="0.01" placeholder="0"></div>
-       <div class="admin-field"><label>PROFIT MARGIN (%)</label><input id="adminMargin" type="number" min="0" max="99.99" step="0.01" value="30"></div>
-       <div class="admin-field full"><label>CALCULATED SELLING PRICE (SAR)</label><input id="adminPrice" type="number" readonly><div class="admin-help">Selling price = Supplier cost / (1 - Margin / 100)</div></div>
+      <div class="vendor-manager">
+        <div class="vendor-manager-head"><strong>VENDOR QUOTATIONS</strong><button class="vendor-add" type="button" onclick="addVendorRow()">+ ADD VENDOR</button></div>
+        <div id="vendorList" class="vendor-list"></div>
+        <div class="admin-help" style="margin-top:9px">Enter each supplier’s contact and quoted cost. Choose which supplier’s cost to use for the selling price.</div>
+      </div>
+      <div class="admin-field"><label>PROFIT MARGIN (%)</label><input id="adminMargin" type="number" min="0" max="99.99" step="0.01" value="30"></div>
+      <div class="admin-field"><label>CALCULATED SELLING PRICE (SAR)</label><input id="adminPrice" type="number" readonly><div class="admin-help">30% margin: cost ÷ 0.70. Formula: cost ÷ (1 − margin / 100).</div></div>
       <div class="admin-field full"><label>DESCRIPTION</label><textarea id="adminDescription" placeholder="Product description..."></textarea></div>
       <div class="admin-field full"><label>SPECIFICATIONS</label><textarea id="adminSpecs" placeholder="Flow Rate: 120 L/min&#10;Voltage: 230 V&#10;Connection: 1 inch"></textarea><div class="admin-help">One specification per line: Name: Value</div></div>
       <div class="admin-field"><label>PRODUCT IMAGE</label><input id="adminImage" type="file" accept="image/png,image/jpeg,image/webp"><div class="admin-help" id="currentImage"></div></div>
@@ -892,11 +959,48 @@ const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 let adminSession = null;
 let isAdmin = false;
 function calcPrice(cost, margin){return Math.round((Number(cost)/(1-Number(margin)/100)+Number.EPSILON)*100)/100;}
-function updateCalculatedPrice(){
- const cost=Number(document.getElementById('adminCost').value||0);
- const margin=Number(document.getElementById('adminMargin').value||0);
- document.getElementById('adminPrice').value=(cost>=0 && margin>=0 && margin<100)?calcPrice(cost,margin).toFixed(2):'';
+function escapeHTML(value){return String(value??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));}
+function vendorRows(){
+ return [...document.querySelectorAll('.vendor-row')].map(row=>({
+   supplier:row.querySelector('[data-vendor-field="supplier"]').value.trim(),
+   phone:row.querySelector('[data-vendor-field="phone"]').value.trim(),
+   cost:row.querySelector('[data-vendor-field="cost"]').value,
+   selected:row.querySelector('[data-vendor-field="selected"]').checked
+ }));
 }
+function updateCalculatedPrice(){
+ const margin=Number(document.getElementById('adminMargin').value||0);
+ const rows=vendorRows();
+ document.querySelectorAll('.vendor-row').forEach(row=>{
+   const field=row.querySelector('[data-vendor-field="cost"]');
+   const output=row.querySelector('[data-vendor-price]');
+   const cost=Number(field.value);
+   output.textContent=(field.value!=='' && cost>=0 && margin>=0 && margin<100)?calcPrice(cost,margin).toFixed(2)+' SAR':'—';
+   row.classList.toggle('is-selected',row.querySelector('[data-vendor-field="selected"]').checked);
+ });
+ const selected=rows.find(row=>row.selected);
+ const cost=Number(selected?.cost||0);
+ document.getElementById('adminPrice').value=(selected?.cost!=='' && selected?.cost!=null && cost>=0 && margin>=0 && margin<100)?calcPrice(cost,margin).toFixed(2):'';
+}
+function addVendorRow(vendor={},selected=false){
+ const row=document.createElement('div');
+ row.className='vendor-row';
+ row.innerHTML=`<div class="vendor-select"><input type="radio" name="sellingVendor" data-vendor-field="selected" aria-label="Use this vendor for selling price"></div><input data-vendor-field="supplier" aria-label="Vendor name" placeholder="Vendor name" value="${escapeHTML(vendor.supplier||'')}"><input data-vendor-field="phone" aria-label="Vendor phone" placeholder="Phone number" value="${escapeHTML(vendor.phone||'')}"><input data-vendor-field="cost" aria-label="Vendor quoted cost in SAR" type="number" min="0" step="0.01" placeholder="Quoted cost (SAR)" value="${vendor.cost==null?'':escapeHTML(vendor.cost)}"><button class="vendor-remove" type="button" aria-label="Remove vendor" onclick="removeVendorRow(this)">×</button><div class="vendor-calculated"><span>Selling price at entered margin: <strong data-vendor-price>—</strong></span><button class="vendor-use" type="button" onclick="selectVendorPrice(this)">USE THIS VENDOR</button></div>`;
+ const radio=row.querySelector('[data-vendor-field="selected"]');
+ radio.checked=selected || !document.querySelector('.vendor-row');
+ row.querySelectorAll('input').forEach(input=>input.addEventListener('input',updateCalculatedPrice));
+ document.getElementById('vendorList').appendChild(row);
+ updateCalculatedPrice();
+}
+function removeVendorRow(button){
+ const rows=[...document.querySelectorAll('.vendor-row')];
+ const wasSelected=button.closest('.vendor-row').querySelector('[data-vendor-field="selected"]').checked;
+ button.closest('.vendor-row').remove();
+ if(!document.querySelector('.vendor-row'))addVendorRow({},true);
+ else if(wasSelected)document.querySelector('.vendor-row [data-vendor-field="selected"]').checked=true;
+ updateCalculatedPrice();
+}
+function selectVendorPrice(button){button.closest('.vendor-row').querySelector('[data-vendor-field="selected"]').checked=true;updateCalculatedPrice();}
 
 
 async function refreshAdminUI(){
@@ -980,6 +1084,8 @@ async function normalizeProduct(product){
         categoryName: categoryLabel(product.category),
         description: product.description || "",
         supplier: product.supplier || "",
+        phone: product.phone || "",
+        vendors: Array.isArray(product.vendors) ? product.vendors : [],
         cost: product.cost == null ? null : Number(product.cost),
         margin: product.margin == null ? null : Number(product.margin),
         price: product.price == null ? null : Number(product.price),
@@ -1044,10 +1150,10 @@ async function loadProducts(){
         });
 
         if(isAdmin && productData.length){
-          const {data: pricing, error: pricingError}=await db.from('product_pricing').select('product_id,supplier,cost,margin,price');
+          const {data: pricing, error: pricingError}=await db.from('product_pricing').select('product_id,supplier,cost,margin,price,vendors');
           if(pricingError)console.error('Pricing access error:',pricingError);
           const prices=new Map((pricing||[]).map(x=>[String(x.product_id),x]));
-          productData.forEach(p=>{const x=prices.get(String(p.id));if(x){p.supplier=x.supplier||'';p.cost=x.cost==null?null:Number(x.cost);p.margin=x.margin==null?null:Number(x.margin);p.price=x.price==null?null:Number(x.price);}});
+          productData.forEach(p=>{const x=prices.get(String(p.id));if(x){p.supplier=x.supplier||'';p.cost=x.cost==null?null:Number(x.cost);p.margin=x.margin==null?null:Number(x.margin);p.price=x.price==null?null:Number(x.price);p.vendors=Array.isArray(x.vendors)?x.vendors:[];}});
         }
         refreshBrandFilter();
         renderProducts();
@@ -1107,9 +1213,11 @@ function openAdmin(product=null){
     document.getElementById("adminModel").value=product?.model || "";
     document.getElementById("adminBrand").value=product?.brand || "";
     document.getElementById("adminCategory").value=product?.category || "pump";
-    document.getElementById("adminSupplier").value=product?.supplier || "";
-    document.getElementById("adminCost").value=product?.cost ?? "";
     document.getElementById("adminMargin").value=product?.margin ?? 30;
+    document.getElementById('vendorList').innerHTML='';
+    const vendors=product?.vendors?.length ? product.vendors : (product?.supplier ? [{supplier:product.supplier,phone:product.phone||'',cost:product.cost}] : []);
+    if(vendors.length)vendors.forEach((vendor,index)=>addVendorRow(vendor,vendor.selected===true || (!vendors.some(v=>v.selected) && index===0)));
+    else addVendorRow({},true);
     updateCalculatedPrice();
     document.getElementById("adminDescription").value=product?.description || "";
     document.getElementById("adminSpecs").value=specsToText(product?.specs);
@@ -1157,6 +1265,15 @@ async function saveProduct(event){
             datasheet_url:datasheetUrl,
             specifications:parseSpecifications(document.getElementById("adminSpecs").value)
         };
+        const marginValue=document.getElementById('adminMargin').value;
+        const margin=marginValue===''?null:Number(marginValue);
+        let vendors=vendorRows().filter(v=>v.supplier||v.phone||v.cost!=='').map(v=>({...v,cost:v.cost===''?null:Number(v.cost)}));
+        if(vendors.some(v=>!v.supplier || v.cost===null || !Number.isFinite(v.cost) || v.cost<0))throw Error('For each vendor, enter a name and a valid quoted cost.');
+        if(vendors.length && (margin===null || !Number.isFinite(margin) || margin<0 || margin>=100))throw Error('Enter a margin between 0 and 99.99%.');
+        if(vendors.length && !vendors.some(v=>v.selected)){vendors[0].selected=true;}
+        const selectedVendor=vendors.find(v=>v.selected)||null;
+        const cost=selectedVendor?.cost ?? null;
+        const price=cost===null?null:calcPrice(cost,margin);
         let result;
 
         if(editingProduct?.id){
@@ -1176,15 +1293,11 @@ async function saveProduct(event){
 
         if(result.error) throw result.error;
 
-        const costValue=document.getElementById('adminCost').value;
-        const marginValue=document.getElementById('adminMargin').value;
-        const cost=costValue===''?null:Number(costValue);
-        const margin=marginValue===''?null:Number(marginValue);
-        if(cost!==null && (!Number.isFinite(cost) || cost<0 || margin===null || !Number.isFinite(margin) || margin<0 || margin>=100))throw Error('Enter a valid nonnegative cost and margin between 0 and 99.99%');
         const {error: pricingSaveError}=await db.from('product_pricing').upsert({
           product_id:result.data.id,
-          supplier:document.getElementById('adminSupplier').value.trim(),
-          cost,margin,price:cost===null?null:calcPrice(cost,margin)
+          supplier:selectedVendor?.supplier||'',
+          cost,margin:vendors.length?margin:null,price,
+          vendors:vendors.map(v=>({...v,margin,price:calcPrice(v.cost,margin)}))
         },{onConflict:'product_id'});
         if(pricingSaveError)throw pricingSaveError;
         // Put the saved product on screen immediately.
@@ -1853,6 +1966,11 @@ function openProduct(id){
         isAdmin ? (activeProduct.price == null ? 'Not set' : activeProduct.price.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})+' SAR') : ''; 
     document.querySelector('.modal-price').classList.toggle('hidden',!isAdmin);
 
+    const vendorBox=document.getElementById('adminVendorPrices');
+    const productVendors=Array.isArray(activeProduct.vendors)&&activeProduct.vendors.length?activeProduct.vendors:(activeProduct.supplier?[{supplier:activeProduct.supplier,phone:activeProduct.phone||'',cost:activeProduct.cost,price:activeProduct.price,selected:true}]:[]);
+    vendorBox.classList.toggle('hidden',!isAdmin || productVendors.length===0);
+    vendorBox.innerHTML=productVendors.length?`<h3>VENDOR PRICE COMPARISON</h3><table><thead><tr><th>Vendor</th><th>Phone</th><th>Quoted Cost</th><th>Selling Price</th></tr></thead><tbody>${productVendors.map(v=>`<tr><td>${escapeHTML(v.supplier||'—')}${v.selected?' · Selected':''}</td><td>${escapeHTML(v.phone||'—')}</td><td>${v.cost==null?'—':Number(v.cost).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})+' SAR'}</td><td>${v.price==null?'—':Number(v.price).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})+' SAR'}</td></tr>`).join('')}</tbody></table>`:'';
+
 
 
     document
@@ -2090,7 +2208,6 @@ document
    START
 ========================================================= */
 
-document.getElementById('adminCost').addEventListener('input',updateCalculatedPrice);
 document.getElementById('adminMargin').addEventListener('input',updateCalculatedPrice);
 window.addEventListener("DOMContentLoaded", async () => {
     await refreshAdminUI();
