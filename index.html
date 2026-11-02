@@ -91,10 +91,6 @@ button{cursor:pointer}
 .product-header-brand{display:flex;align-items:center;cursor:pointer}
 .product-header .vega-logo{width:230px;height:57px;object-fit:contain}
 .product-header-actions{display:flex;align-items:center;gap:12px;justify-self:end}
-.product-header-search{
-  width:340px;height:42px;padding:0 14px;outline:0;border:1px solid #343b42;
-  border-radius:4px;background:#12161a;color:#fff
-}
 .back-button{
   height:42px;padding:0 18px;border:1px solid #49525b;border-radius:4px;
   background:transparent;color:#fff;font-size:10px;font-weight:bold
@@ -183,7 +179,6 @@ footer{padding:24px 5%;display:flex;justify-content:space-between;gap:20px;backg
   .products{grid-template-columns:1fr}
   .category-tabs{grid-template-columns:1fr 1fr}
   .filters{grid-template-columns:1fr}
-  .product-header-search{display:none}
   .modal-box{grid-template-columns:1fr}.modal-image{min-height:280px}
 }
 
@@ -241,8 +236,6 @@ footer{padding:24px 5%;display:flex;justify-content:space-between;gap:20px;backg
 .product-header-brand{display:none!important}
 .product-header>div:nth-child(2){display:none}
 .product-header-actions{gap:10px;width:100%;justify-content:flex-end}
-.product-header-search{width:min(420px,34vw);height:44px;border:1px solid #2b3238;border-radius:2px;background:#0e1215;color:#fff}
-.product-header-search:focus{border-color:#ed1c24;box-shadow:0 0 0 2px rgba(237,28,36,.08)}
 .back-button,.admin-login-button{height:44px;border:1px solid #343b42;border-radius:2px;background:#0d1013;color:#fff;letter-spacing:.7px}
 .back-button:hover,.admin-login-button:hover{border-color:#ed1c24;color:#ed1c24}
 .add-product-button{height:44px;border-radius:2px!important;background:#ed1c24!important;color:#fff!important}
@@ -264,22 +257,22 @@ footer{padding:24px 5%;display:flex;justify-content:space-between;gap:20px;backg
 .card-brand{color:#ed1c24}.card-body{padding:19px}.card-body h3{font-size:18px;color:#fff}.model{color:#89939b}.description{color:#9099a1}.mini-specs,.card-footer{border-color:#252b30}.mini-spec span{color:#747e87}.mini-spec strong{color:#dfe3e6}.price small{color:#717b83}.details-button{border:1px solid #30373d;border-radius:2px;background:#171c20}.details-button:hover{border-color:#ed1c24;background:#ed1c24}
 .no-products{padding:75px 20px;border:1px dashed #30363b;border-radius:2px;background:#0c1013;color:#77818a}
 footer{background:#06080a;border-color:#1c2125;color:#59636c}
-@media(max-width:1100px){.products{grid-template-columns:repeat(3,1fr)}.product-header-search{width:300px}}
-@media(max-width:800px){.product-header{grid-template-columns:1fr}.product-header-actions{flex-wrap:wrap}.product-header-search{order:3;width:100%}.catalog-hero{min-height:160px;padding:32px 5%}.products{grid-template-columns:repeat(2,1fr)}.filters{grid-template-columns:1fr}.product-count{display:none}}
+@media(max-width:1100px){.products{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:800px){.product-header{grid-template-columns:1fr}.product-header-actions{flex-wrap:wrap}.catalog-hero{min-height:160px;padding:32px 5%}.products{grid-template-columns:repeat(2,1fr)}.filters{grid-template-columns:1fr}.product-count{display:none}}
 @media(max-width:520px){.products{grid-template-columns:1fr}.catalog-hero h1{font-size:38px}.catalog-container{padding-left:16px;padding-right:16px}.category-tab{flex-basis:120px}}
 
 /* ===== VEGA PRODUCT LIBRARY — CLEAN DARK UI ===== */
 #productPage{min-height:100vh;background:#07090b;color:#f4f6f7}
 .product-header{min-height:68px;padding:0 4%;grid-template-columns:1fr auto;gap:22px;background:rgba(6,8,10,.97);border-bottom:1px solid #20252a;backdrop-filter:blur(14px)}
 .product-header-brand{gap:10px;color:#fff;white-space:nowrap}.library-mark{font-size:19px;font-weight:900;letter-spacing:2px}.library-slash{color:#ed1c24;font-size:20px}.library-name{font-size:10px;font-weight:800;letter-spacing:2.4px;color:#7f8992}
-.product-header>div:nth-child(2){display:none}.product-header-actions{gap:9px}.product-header-search{width:min(32vw,390px);height:40px;border:1px solid #252c32;border-radius:2px;background:#0d1114;color:#fff}.product-header-search:focus{border-color:#ed1c24}.back-button,.admin-login-button,.add-product-button{height:40px;border-radius:2px}
+.product-header>div:nth-child(2){display:none}.product-header-actions{gap:9px}.back-button,.admin-login-button,.add-product-button{height:40px;border-radius:2px}
 .catalog-hero{min-height:175px;padding:38px 4%;align-items:center;background:radial-gradient(circle at 82% 30%,rgba(237,28,36,.16),transparent 28%),linear-gradient(135deg,#0b0e11,#07090b 72%);border-bottom:1px solid #1b2024}
 .catalog-hero small{font-size:8px;letter-spacing:3.2px;color:#737e87}.catalog-hero h1{margin-top:12px;font-size:clamp(34px,4vw,58px);letter-spacing:-1.5px}.catalog-hero h1 span{color:#ed1c24}.product-count{padding-left:28px;border-left:1px solid #272d32;color:#69747d}.product-count strong{font-size:34px}
 .catalog-container{max-width:1600px;padding:24px 4% 70px}.category-tabs{display:flex;gap:7px;margin:0 0 12px;overflow-x:auto;padding-bottom:2px}.category-tab{flex:1 0 125px;min-height:45px;padding:0 15px;border:1px solid #252b30;border-radius:2px;background:#0d1114;color:#8d969e;font-size:9px;letter-spacing:.5px}.category-tab:hover{background:#12171b;border-color:#4a2024;color:#fff}.category-tab.active{background:#ed1c24;border-color:#ed1c24;color:#fff}
 .filters{grid-template-columns:2fr 1fr 1fr;gap:8px;margin-bottom:22px;padding:0;background:transparent;border:0}.filters input,.filters select{height:44px;border:1px solid #252b30;border-radius:2px;background:#0d1114;color:#dce1e4}.filters input:focus,.filters select:focus{border-color:#ed1c24}
 .products{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.card{border:1px solid #20262b;border-radius:2px;background:#0c1013;color:#fff;box-shadow:none}.card:hover{transform:translateY(-3px);border-color:#414950;box-shadow:0 18px 45px rgba(0,0,0,.38)}.card-image{height:225px;background:radial-gradient(circle at 50% 40%,#262c30 0,#14191d 48%,#090c0f 100%)}.card-image img{max-width:86%;max-height:86%;object-fit:contain}.card-category{background:#090c0ee8;border-left:2px solid #ed1c24;color:#c7ced3}.card-brand{color:#ed1c24}.card-body{padding:17px}.card-body h3{font-size:17px}.description{min-height:52px;color:#818b93}.mini-specs,.card-footer{border-color:#22282d}.details-button{border:1px solid #2b3238;background:#12171b}.details-button:hover{background:#ed1c24;border-color:#ed1c24}.no-products{padding:80px 20px;border:1px dashed #2b3238;border-radius:2px;background:#0b0e11;color:#65717a}
 footer{background:#050607;border-color:#191e22;color:#59636c}
-@media(max-width:1050px){.products{grid-template-columns:repeat(3,1fr)}.product-header{grid-template-columns:1fr}.product-header-actions{justify-self:stretch;flex-wrap:wrap}.product-header-search{width:100%;order:4}.library-name{display:none}}
+@media(max-width:1050px){.products{grid-template-columns:repeat(3,1fr)}.product-header{grid-template-columns:1fr}.product-header-actions{justify-self:stretch;flex-wrap:wrap}.library-name{display:none}}
 @media(max-width:760px){.products{grid-template-columns:repeat(2,1fr)}.filters{grid-template-columns:1fr}.catalog-hero{min-height:145px}.product-count{display:none}}
 @media(max-width:500px){.products{grid-template-columns:1fr}.catalog-container{padding-left:14px;padding-right:14px}.catalog-hero{padding-left:18px;padding-right:18px}.catalog-hero h1{font-size:34px}}
 /* ===== MOBILE HOME — FINAL FIX ===== */
@@ -394,14 +387,6 @@ footer{background:#050607;border-color:#191e22;color:#59636c}
                 <button class="add-product-button" type="button" onclick="openAdmin()">＋ ADD PRODUCT</button>
                 <button class="admin-login-button" type="button" onclick="logoutAdmin()">LOG OUT</button>
             </div>
-
-
-            <input
-                id="headerProductSearch"
-                class="product-header-search"
-                type="search"
-                placeholder="Search products, brands or models..."
-            >
 
 
             <button
@@ -1342,13 +1327,6 @@ function showProducts(searchValue=""){
             searchValue;
 
 
-        document
-        .getElementById(
-            "headerProductSearch"
-        )
-        .value =
-            searchValue;
-
     }
 
 
@@ -2048,46 +2026,6 @@ document
 .addEventListener(
     "input",
     function(){
-
-
-        document
-        .getElementById(
-            "headerProductSearch"
-        )
-        .value=
-
-            this.value;
-
-
-        renderProducts();
-
-    }
-);
-
-
-
-/* =========================================================
-   HEADER SEARCH
-========================================================= */
-
-document
-.getElementById(
-    "headerProductSearch"
-)
-.addEventListener(
-    "input",
-    function(){
-
-
-        document
-        .getElementById(
-            "catalogSearch"
-        )
-        .value=
-
-            this.value;
-
-
         renderProducts();
 
     }
